@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex3D | Immersive 3D Twins & Metric Floor Plans</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              teal: '#0df2c9',
+              tealHover: '#00d6ae',
+              navy: '#060b13',
+              card: '#0d1522',
+              cardLight: '#142033',
+              border: '#1f2e46',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #060b13;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+    }
+    .teal-glow {
+      box-shadow: 0 0 35px -5px rgba(13, 242, 201, 0.25);
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, #ffffff 30%, #0df2c9 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    /* Custom Range Slider styling */
+    input[type=range]::-webkit-slider-thumb {
+      height: 24px;
+      width: 24px;
+      border-radius: 9999px;
+      background: #0df2c9;
+      cursor: pointer;
+      -webkit-appearance: none;
+      box-shadow: 0 0 12px rgba(13, 242, 201, 0.7);
+    }
+  </style>
+</head>
+<body class="selection:bg-brand-teal selection:text-slate-900 overflow-x-hidden">
+
+  <header class="fixed top-0 left-0 right-0 z-50 bg-[#060b13]/85 backdrop-blur-md border-b border-brand-border/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-teal to-blue-500 p-0.5 flex items-center justify-center">
+          <div class="w-full h-full bg-brand-navy rounded-[10px] flex items-center justify-center">
+            <i data-lucide="box" class="w-5 h-5 text-brand-teal"></i>
+          </div>
+        </div>
+        <span class="text-xl font-bold tracking-tight text-white">Apex<span class="text-brand-teal">3D</span></span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#services" class="hover:text-brand-teal transition-colors">Services</a>
+        <a href="#demo" class="hover:text-brand-teal transition-colors">Live 3D Tour</a>
+        <a href="#pricing" class="hover:text-brand-teal transition-colors">Packages</a>
+        <a href="#calculator" class="hover:text-brand-teal transition-colors">Instant Quote</a>
+        <a href="#comparison" class="hover:text-brand-teal transition-colors">Why 3D?</a>
+      </nav>
+
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="#booking" class="px-5 py-2.5 rounded-xl bg-brand-teal text-brand-navy font-semibold text-sm hover:bg-brand-tealHover transition-all teal-glow">
+          Book a Scan
+        </a>
+      </div>
+
+      <!-- Mobile Menu Toggle Button -->
+      <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white p-2">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-brand-navy border-b border-brand-border px-6 py-4 flex flex-col gap-4 text-sm font-medium text-slate-300">
+      <a href="#services" class="mobile-nav-link hover:text-brand-teal">Services</a>
+      <a href="#demo" class="mobile-nav-link hover:text-brand-teal">Live 3D Tour</a>
+      <a href="#pricing" class="mobile-nav-link hover:text-brand-teal">Packages</a>
+      <a href="#calculator" class="mobile-nav-link hover:text-brand-teal">Instant Quote</a>
+      <a href="#comparison" class="mobile-nav-link hover:text-brand-teal">Why 3D?</a>
+      <a href="#booking" class="mobile-nav-link text-brand-teal font-semibold">Book a Scan &rarr;</a>
+    </div>
+  </header>
+
+  <section class="relative pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden">
+    <!-- Ambient background light glows -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-brand-teal/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute top-1/3 right-10 w-[300px] h-[300px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-teal/30 bg-brand-teal/5 text-brand-teal text-xs font-semibold uppercase tracking-wider mb-6">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Powered by Matterport & Insta360 Tech
+      </div>
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-4xl mx-auto leading-tight sm:leading-tight">
+        Immersive <span class="text-gradient">3D Digital Twins</span> & Metric Floor Plans.
+      </h1>
+      <p class="mt-6 text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+        Showcase real estate listings, boutique hotels, and commercial spaces with interactive 24/7 walkthroughs and room dimensions in square meters (m²).
+      </p>
+
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#calculator" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-teal text-brand-navy font-bold text-base hover:bg-brand-tealHover transition-all teal-glow flex items-center justify-center gap-2">
+          <i data-lucide="calculator" class="w-5 h-5"></i> Calculate Property Quote
+        </a>
+        <a href="#demo" class="w-full sm:w-auto px-8 py-4 rounded-xl border border-brand-border bg-brand-card/80 text-white font-medium text-base hover:bg-brand-cardLight transition-all flex items-center justify-center gap-2">
+          <i data-lucide="play" class="w-5 h-5 text-brand-teal"></i> Explore 3D Walkthrough
+        </a>
+      </div>
+
+      <!-- Trust Badges -->
+      <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto border-t border-brand-border/60 pt-8 text-left">
+        <div class="flex items-center gap-3">
+          <i data-lucide="clock" class="w-5 h-5 text-brand-teal shrink-0"></i>
+          <span class="text-xs sm:text-sm text-slate-300 font-medium">Under 24h Turnaround</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <i data-lucide="ruler" class="w-5 h-5 text-brand-teal shrink-0"></i>
+          <span class="text-xs sm:text-sm text-slate-300 font-medium">Metric (m²) Floor Plans</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-teal shrink-0"></i>
+          <span class="text-xs sm:text-sm text-slate-300 font-medium">MLS & Portal Compliant</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <i data-lucide="globe" class="w-5 h-5 text-brand-teal shrink-0"></i>
+          <span class="text-xs sm:text-sm text-slate-300 font-medium">Google Street View Ready</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="demo" class="py-20 bg-brand-card/40 border-y border-brand-border/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-brand-teal font-semibold text-xs tracking-widest uppercase">Live Interactive Showcase</span>
+        <h2 class="text-3xl sm:text-4xl font-bold mt-2 text-white">Experience an Interactive Space</h2>
+        <p class="text-slate-400 mt-3 text-sm sm:text-base">
+          Click and drag to orbit, tap rings on the floor to step through rooms, or toggle the dollhouse mode to view full volumetric layouts.
+        </p>
+      </div>
+
+      <!-- Tour Wrapper -->
+      <div class="relative w-full rounded-2xl overflow-hidden border border-brand-border bg-black shadow-2xl aspect-[16/9] max-h-[620px]">
+        <iframe 
+          id="matterport-frame"
+          src="https://my.matterport.com/show/?m=SX2iMmEZBgE&play=1&qs=1&brand=0" 
+          class="w-full h-full border-0" 
+          allowfullscreen 
+          allow="xr-spatial-tracking">
+        </iframe>
+      </div>
+      <div class="flex flex-wrap items-center justify-between mt-4 text-xs text-slate-400 px-2 gap-2">
+        <div class="flex items-center gap-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-brand-teal animate-pulse"></span>
+          <span>Live Matterport 3D Showcase (Desktop & Touch Gesture Compatible)</span>
+        </div>
+        <a href="#booking" class="text-brand-teal hover:underline flex items-center gap-1 font-medium">
+          Ready to capture your listing like this? Schedule a shoot &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-brand-teal font-semibold text-xs tracking-widest uppercase">Why 3D Scans Convert</span>
+      <h2 class="text-3xl sm:text-4xl font-bold mt-2 text-white">Engineered for Sellers, Buyers & Venues</h2>
+      <p class="text-slate-400 mt-3">Static pictures miss scale and spatial connection. Matterport 3D twin experiences deliver verified clarity.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Card 1 -->
+      <div class="bg-brand-card p-8 rounded-2xl border border-brand-border/80 hover:border-brand-teal/50 transition-all">
+        <div class="w-12 h-12 rounded-xl bg-brand-teal/10 border border-brand-teal/20 flex items-center justify-center text-brand-teal mb-6">
+          <i data-lucide="eye" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-3">24/7 Virtual Open House</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          Allow international investors, relocation buyers, and vacationers to walk room-to-room anytime from anywhere in the world on their phone or laptop.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-brand-card p-8 rounded-2xl border border-brand-border/80 hover:border-brand-teal/50 transition-all">
+        <div class="w-12 h-12 rounded-xl bg-brand-teal/10 border border-brand-teal/20 flex items-center justify-center text-brand-teal mb-6">
+          <i data-lucide="drafting-compass" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-3">Accurate Metric (m²) Schematics</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          Deliver certified, ready-to-print 2D floor plans with total internal area and individual room measurements displayed clearly in meters.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-brand-card p-8 rounded-2xl border border-brand-border/80 hover:border-brand-teal/50 transition-all">
+        <div class="w-12 h-12 rounded-xl bg-brand-teal/10 border border-brand-teal/20 flex items-center justify-center text-brand-teal mb-6">
+          <i data-lucide="zap" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-3">Next-Day Delivery Speed</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          Our rapid Insta360-assisted on-site scanning minimizes disruption—we're off property in 45 minutes and deliver your MLS and social links within 24 hours.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="py-24 bg-brand-card/30 border-t border-brand-border/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-brand-teal font-semibold text-xs tracking-widest uppercase">Transparent Metric Pricing</span>
+        <h2 class="text-3xl sm:text-4xl font-bold mt-2 text-white">Tiered by Square Meters (m²)</h2>
+        <p class="text-slate-400 mt-3">Simple pricing with no hidden charges. Choose your size bracket or configure a custom bundle.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+        
+        <!-- Tier 1 -->
+        <div class="bg-brand-card rounded-2xl p-8 border border-brand-border flex flex-col justify-between hover:border-slate-600 transition-all">
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Urban / Studio / 1–2 BR</span>
+            <h3 class="text-2xl font-bold text-white mt-1">Up to 140 m²</h3>
+            <div class="mt-6 flex items-baseline gap-2">
+              <span class="text-4xl font-black text-white">$195</span>
+              <span class="text-slate-400 text-sm">USD</span>
+            </div>
+            <p class="text-xs text-brand-teal mt-1">Effective rate: ~$1.39 – $2.50 / m²</p>
+            <p class="text-xs text-slate-400 mt-2">Ideal for city apartments, condos, and Airbnb rentals.</p>
+
+            <div class="my-6 border-t border-brand-border"></div>
+
+            <ul class="space-y-3 text-sm text-slate-300">
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-teal shrink-0"></i> Full 3D Matterport Tour Walkthrough</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-teal shrink-0"></i> MLS & Branded Marketing Links</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-teal shrink-0"></i> 90 Days Active Cloud Hosting</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-teal shrink-0"></i> 5 Extracted HD Wide-Angle Stills</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-teal shrink-0"></i> Scan Time: ~35–45 minutes</li>
+            </ul>
+          </div>
+          <a href="#calculator" class="mt-8 block text-center py-3 rounded-xl bg-brand-cardLight border border-brand-border hover:border-brand-teal text-white font-semibold text-sm transition-all">
+            Select Package
+          </a>
+        </div>
+
+        <!-- Tier 2 (Featured) -->
+        <div class="bg-gradient-to-b from-brand-cardLight to-brand-card rounded-2xl p-8 border-2 border-brand-teal flex flex-col justify-between relative shadow-2xl">
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-brand-teal text-brand-navy font-extrabold text-xs tracking-wider uppercase">
+            Most Popular Choice
+          </div>
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-brand-teal">Family Home / Mid-Size</span>
+            <h3 class="text-2xl font-bold text-white mt-1">141 m² – 300 m²</h3>
+            <div class="mt-6 flex items-baseline gap-2">
+              <span class="text-4xl font-black text-white">$295</span>
+              <span class="text-slate-400 text-sm">USD</span>
+            </div>
+            <p class="text-xs text-brand-teal mt-1">Effective rate: ~$1.00 – $1.75 / m²</p>
+            <p class="text-xs text-slate-400 mt-2">Standard residences, duplexes, and multi-bedroom villas.</p>
+
+            <div class="my-6 border-t border-brand-border"></div>
+
+            <ul class="space-y-3 text-sm text-slate-200">
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-teal shrink-0"></i> Everything in Tier 1</li>
+              <li class="flex items-center gap-3 font-medium text-white"><i data-lucide="check" class="w-4 h-4 text-brand-teal shrink-0"></i> Schematic 2D Metric Floor Plan (PDF/PNG)</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-teal shrink-0"></i> 6 Months Active Cloud Hosting</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-teal shrink-0"></i> Highlight Reel Guided Walkthrough</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-teal shrink-0"></i> Scan Time: ~45–60 minutes</li>
+            </ul>
+          </div>
+          <a href="#calculator" class="mt-8 block text-center py-3.5 rounded-xl bg-brand-teal text-brand-navy font-bold text-sm hover:bg-brand-tealHover transition-all teal-glow">
+            Book Most Popular
+          </a>
+        </div>
+
+        <!-- Tier 3 -->
+        <div class="bg-brand-card rounded-2xl p-8 border border-brand-border flex flex-col justify-between hover:border-slate-600 transition-all">
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Luxury Villa / Commercial</span>
+            <h3 class="text-2xl font-bold text-white mt-1">301 m² – 500 m²</h3>
+            <div class="mt-6 flex items-baseline gap-2">
+              <span class="text-4xl font-black text-white">$475</span>
+              <span class="text-slate-400 text-sm">USD</span>
+            </div>
+            <p class="text-xs text-brand-teal mt-1">Effective rate: ~$0.95 – $1.35 / m²</p>
+            <p class="text-xs text-slate-400 mt-2">Boutique hotels, commercial retail, restaurants, and luxury estates.</p>
+
+            <div class="my-6 border-t border-brand-border"></div>
+
+            <ul class="space-y-3 text-sm text-slate-300">
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-teal shrink-0"></i> Everything in Tier 2</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-teal shrink-0"></i> Schematic 2D Metric Floor Plan (Included)</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-teal shrink-0"></i> Up to 10 Interactive Feature Mattertags</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-teal shrink-0"></i> 12 Months Active Cloud Hosting</li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-teal shrink-0"></i> Scan Time: ~75–100 minutes</li>
+            </ul>
+          </div>
+          <a href="#calculator" class="mt-8 block text-center py-3 rounded-xl bg-brand-cardLight border border-brand-border hover:border-brand-teal text-white font-semibold text-sm transition-all">
+            Select Package
+          </a>
+        </div>
+
+      </div>
+
+      <div class="mt-8 text-center text-xs text-slate-400">
+        Properties larger than 500 m² are billed at standard Tier 3 + $60 per additional 100 m². <a href="#booking" class="text-brand-teal underline">Contact us</a> for multi-unit developer portfolios.
+      </div>
+    </div>
+  </section>
+
+  <section id="calculator" class="py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-brand-card border border-brand-border rounded-3xl p-6 sm:p-12 relative shadow-2xl">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-brand-teal font-semibold text-xs tracking-widest uppercase">Instant Estimator</span>
+        <h2 class="text-3xl font-bold text-white mt-1">Configure Your Project Quote</h2>
+        <p class="text-slate-400 text-sm mt-2">Adjust your property's metric size and choose optional add-on deliverables.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <!-- Sliders & Options (7 cols) -->
+        <div class="lg:col-span-7 space-y-6">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <label for="sqm-slider" class="text-sm font-semibold text-slate-200">Property Area</label>
+              <div class="text-right">
+                <span id="sqm-val-display" class="text-2xl font-bold text-brand-teal">200</span>
+                <span class="text-slate-400 text-sm font-medium"> m²</span>
+              </div>
+            </div>
+            <input 
+              id="sqm-slider" 
+              type="range" 
+              min="50" 
+              max="700" 
+              value="200" 
+              step="10"
+              class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer"
+            >
+            <div class="flex justify-between text-[11px] text-slate-400 mt-2 font-mono">
+              <span>50 m² (Studio)</span>
+              <span>250 m² (Villa)</span>
+              <span>500 m²</span>
+              <span>700 m² (Commercial)</span>
+            </div>
+          </div>
+
+          <!-- Addons Checklist -->
+          <div class="space-y-3 pt-4 border-t border-brand-border">
+            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider block">Add-On Deliverables</span>
+
+            <label class="flex items-center justify-between p-3.5 rounded-xl bg-brand-cardLight border border-brand-border cursor-pointer hover:border-slate-600 transition-colors">
+              <div class="flex items-center gap-3">
+                <input id="addon-floorplan" type="checkbox" class="w-5 h-5 rounded border-slate-600 text-brand-teal focus:ring-0">
+                <div>
+                  <div class="text-sm font-semibold text-white">Schematic 2D Floor Plan (Metric)</div>
+                  <div class="text-xs text-slate-400">PDF + PNG formats with individual room dimensions in meters</div>
+                </div>
+              </div>
+              <span id="floorplan-price-label" class="text-sm font-bold text-brand-teal">+$60</span>
+            </label>
+
+            <label class="flex items-center justify-between p-3.5 rounded-xl bg-brand-cardLight border border-brand-border cursor-pointer hover:border-slate-600 transition-colors">
+              <div class="flex items-center gap-3">
+                <input id="addon-mattertags" type="checkbox" class="w-5 h-5 rounded border-slate-600 text-brand-teal focus:ring-0">
+                <div>
+                  <div class="text-sm font-semibold text-white">Interactive Feature Mattertags (x10)</div>
+                  <div class="text-xs text-slate-400">Clickable tags for luxury finishes, smart tech, & appliances</div>
+                </div>
+              </div>
+              <span id="mattertags-price-label" class="text-sm font-bold text-brand-teal">+$45</span>
+            </label>
+
+            <label class="flex items-center justify-between p-3.5 rounded-xl bg-brand-cardLight border border-brand-border cursor-pointer hover:border-slate-600 transition-colors">
+              <div class="flex items-center gap-3">
+                <input id="addon-gsv" type="checkbox" class="w-5 h-5 rounded border-slate-600 text-brand-teal focus:ring-0">
+                <div>
+                  <div class="text-sm font-semibold text-white">Google Street View Publication</div>
+                  <div class="text-xs text-slate-400">Direct sync to Google Maps & your Google Business Profile</div>
+                </div>
+              </div>
+              <span class="text-sm font-bold text-brand-teal">+$65</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Calculated Summary Box (5 cols) -->
+        <div class="lg:col-span-5 bg-brand-cardLight border border-brand-teal/40 rounded-2xl p-6 text-center flex flex-col justify-between shadow-lg">
+          <div>
+            <span class="text-xs font-semibold text-slate-400 uppercase tracking-widest">Estimated Investment</span>
+            <div class="mt-4 flex items-baseline justify-center gap-2">
+              <span class="text-sm text-slate-400">$</span>
+              <span id="calc-total-price" class="text-5xl font-extrabold text-white">295</span>
+              <span class="text-slate-400 text-sm font-medium">USD</span>
+            </div>
+            <div id="calc-effective-rate" class="text-xs text-brand-teal mt-1 font-mono">~$1.48 / m²</div>
+
+            <div class="mt-6 text-left space-y-2 text-xs text-slate-300 border-t border-brand-border pt-4">
+              <div class="flex justify-between">
+                <span>Selected Area:</span>
+                <span id="summary-area" class="font-semibold text-white">200 m²</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Estimated Scan Time:</span>
+                <span id="summary-time" class="font-semibold text-white">45–60 mins</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Turnaround Window:</span>
+                <span class="font-semibold text-brand-teal">&lt; 24 Hours</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 space-y-3">
+            <button id="book-quote-btn" class="w-full py-3.5 rounded-xl bg-brand-teal text-brand-navy font-bold text-sm hover:bg-brand-tealHover transition-all flex items-center justify-center gap-2 teal-glow">
+              <i data-lucide="message-square" class="w-4 h-4"></i> Lock In Quote via WhatsApp
+            </button>
+            <p class="text-[11px] text-slate-400">Instantly pre-fills your WhatsApp message with this property scope.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="comparison" class="py-24 bg-brand-card/20 border-t border-brand-border/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-brand-teal font-semibold text-xs tracking-widest uppercase">The Visual Advantage</span>
+        <h2 class="text-3xl sm:text-4xl font-bold mt-2 text-white">Why Still Photos Are No Longer Enough</h2>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-sm">
+          <thead>
+            <tr class="border-b border-brand-border text-slate-400 text-xs uppercase tracking-wider">
+              <th class="py-4 px-6">Feature / Capability</th>
+              <th class="py-4 px-6">Standard Photos</th>
+              <th class="py-4 px-6">Video Walkthrough</th>
+              <th class="py-4 px-6 text-brand-teal font-bold bg-brand-teal/5">Apex3D Matterport Twin</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-brand-border/50 text-slate-300">
+            <tr>
+              <td class="py-4 px-6 font-medium text-white">Spatial Awareness & True Scale</td>
+              <td class="py-4 px-6 text-slate-500">Low (wide lenses distort)</td>
+              <td class="py-4 px-6 text-slate-400">Moderate</td>
+              <td class="py-4 px-6 font-semibold text-brand-teal bg-brand-teal/5">100% Volumetric Realism</td>
+            </tr>
+            <tr>
+              <td class="py-4 px-6 font-medium text-white">Metric Measurement Tool (m²)</td>
+              <td class="py-4 px-6 text-rose-500/80">No</td>
+              <td class="py-4 px-6 text-rose-500/80">No</td>
+              <td class="py-4 px-6 font-semibold text-brand-teal bg-brand-teal/5">Integrated Live Laser Ruler</td>
+            </tr>
+            <tr>
+              <td class="py-4 px-6 font-medium text-white">Buyer Controls the Navigation</td>
+              <td class="py-4 px-6 text-rose-500/80">Passive Swiping</td>
+              <td class="py-4 px-6 text-rose-500/80">Fixed Camera Path</td>
+              <td class="py-4 px-6 font-semibold text-brand-teal bg-brand-teal/5">Full Self-Guided Exploration</td>
+            </tr>
+            <tr>
+              <td class="py-4 px-6 font-medium text-white">2D Schematic Floor Plan Output</td>
+              <td class="py-4 px-6 text-slate-500">Separate CAD fee required</td>
+              <td class="py-4 px-6 text-rose-500/80">None</td>
+              <td class="py-4 px-6 font-semibold text-brand-teal bg-brand-teal/5">Generated Directly from Scan</td>
+            </tr>
+            <tr>
+              <td class="py-4 px-6 font-medium text-white">Out-of-Town Buyer Confidence</td>
+              <td class="py-4 px-6 text-slate-500">Low</td>
+              <td class="py-4 px-6 text-slate-400">Moderate</td>
+              <td class="py-4 px-6 font-semibold text-brand-teal bg-brand-teal/5">Highest (Sight-Unseen Ready)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="booking" class="py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-brand-card border border-brand-border rounded-3xl p-8 sm:p-12 shadow-2xl relative">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-brand-teal font-semibold text-xs tracking-widest uppercase">Fast Dispatch</span>
+        <h2 class="text-3xl font-bold text-white mt-1">Book Your Property Scan</h2>
+        <p class="text-slate-400 text-sm mt-2">Fill in your property details for same-day booking confirmation.</p>
+      </div>
+
+      <form id="contact-form" class="space-y-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Your Name</label>
+            <input type="text" id="form-name" required placeholder="Carlos Santana" class="w-full px-4 py-3 rounded-xl bg-brand-cardLight border border-brand-border text-white text-sm focus:outline-none focus:border-brand-teal">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">WhatsApp or Phone</label>
+            <input type="tel" id="form-phone" required placeholder="+1 (809) 000-0000" class="w-full px-4 py-3 rounded-xl bg-brand-cardLight border border-brand-border text-white text-sm focus:outline-none focus:border-brand-teal">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Property Address / City</label>
+            <input type="text" id="form-location" required placeholder="Piantini, Santo Domingo" class="w-full px-4 py-3 rounded-xl bg-brand-cardLight border border-brand-border text-white text-sm focus:outline-none focus:border-brand-teal">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Approximate Size (m²)</label>
+            <input type="number" id="form-sqm" required placeholder="e.g. 185" class="w-full px-4 py-3 rounded-xl bg-brand-cardLight border border-brand-border text-white text-sm focus:outline-none focus:border-brand-teal">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Special Notes or Timing</label>
+          <textarea id="form-notes" rows="3" placeholder="Access code, staging details, or specific requested date..." class="w-full px-4 py-3 rounded-xl bg-brand-cardLight border border-brand-border text-white text-sm focus:outline-none focus:border-brand-teal"></textarea>
+        </div>
+
+        <!-- Feedback Notification box -->
+        <div id="booking-alert" class="hidden p-4 rounded-xl text-sm font-medium"></div>
+
+        <button type="submit" class="w-full py-4 rounded-xl bg-brand-teal text-brand-navy font-bold text-base hover:bg-brand-tealHover transition-all teal-glow flex items-center justify-center gap-2">
+          <i data-lucide="calendar" class="w-5 h-5"></i> Submit Booking Request
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="py-12 border-t border-brand-border/60 bg-[#04080e] text-slate-500 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <i data-lucide="box" class="w-5 h-5 text-brand-teal"></i>
+        <span class="text-white font-bold tracking-tight text-sm">Apex<span class="text-brand-teal">3D</span> Virtual Scanning Studio</span>
+      </div>
+      <div>
+        &copy; 2026 Apex3D. Matterport is a registered trademark of Matterport, Inc. Independent digital scanning provider.
+      </div>
+      <div class="flex items-center gap-4 text-slate-400">
+        <a href="#services" class="hover:text-brand-teal">Services</a>
+        <a href="#pricing" class="hover:text-brand-teal">Pricing (m²)</a>
+        <a href="#booking" class="hover:text-brand-teal">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Mobile nav toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // Calculator DOM Elements
+    const sqmSlider = document.getElementById('sqm-slider');
+    const sqmValDisplay = document.getElementById('sqm-val-display');
+    const addonFloorplan = document.getElementById('addon-floorplan');
+    const addonMattertags = document.getElementById('addon-mattertags');
+    const addonGSV = document.getElementById('addon-gsv');
+    const floorplanPriceLabel = document.getElementById('floorplan-price-label');
+    const mattertagsPriceLabel = document.getElementById('mattertags-price-label');
+
+    const calcTotalPrice = document.getElementById('calc-total-price');
+    const calcEffectiveRate = document.getElementById('calc-effective-rate');
+    const summaryArea = document.getElementById('summary-area');
+    const summaryTime = document.getElementById('summary-time');
+    const bookQuoteBtn = document.getElementById('book-quote-btn');
+
+    // Pricing calculation function
+    function updateCalculations() {
+      const sqm = parseInt(sqmSlider.value, 10);
+      sqmValDisplay.textContent = sqm;
+      summaryArea.textContent = `${sqm} m²`;
+
+      let basePrice = 0;
+      let scanDuration = '';
+
+      // Tier logic matching metric pricing matrix
+      if (sqm <= 140) {
+        basePrice = 195;
+        scanDuration = '30–45 mins';
+        // Floor plan is an a la carte add-on for Tier 1
+        floorplanPriceLabel.textContent = '+$60';
+        mattertagsPriceLabel.textContent = '+$45';
+      } else if (sqm <= 300) {
+        basePrice = 295;
+        scanDuration = '45–60 mins';
+        // Floor plan is already included in Tier 2
+        floorplanPriceLabel.textContent = 'Included in Base';
+        mattertagsPriceLabel.textContent = '+$45';
+      } else if (sqm <= 500) {
+        basePrice = 475;
+        scanDuration = '75–100 mins';
+        // Floor plan is already included in Tier 3
+        floorplanPriceLabel.textContent = 'Included in Base';
+        mattertagsPriceLabel.textContent = 'Included in Base';
+      } else {
+        // Properties above 500 sqm: $475 + $60 per additional 100 sqm
+        const extraSqm = sqm - 500;
+        const extraChunks = Math.ceil(extraSqm / 100);
+        basePrice = 475 + (extraChunks * 60);
+        scanDuration = '2+ hours (Custom)';
+        floorplanPriceLabel.textContent = 'Included in Base';
+        mattertagsPriceLabel.textContent = 'Included in Base';
+      }
+
+      summaryTime.textContent = scanDuration;
+
+      // Add-on cost checks
+      let addonTotal = 0;
+      if (addonFloorplan.checked && sqm <= 140) {
+        addonTotal += 60;
+      }
+      if (addonMattertags.checked && sqm <= 300) {
+        addonTotal += 45;
+      }
+      if (addonGSV.checked) {
+        addonTotal += 65;
+      }
+
+      const grandTotal = basePrice + addonTotal;
+      calcTotalPrice.textContent = grandTotal;
+      const ratePerM2 = (grandTotal / sqm).toFixed(2);
+      calcEffectiveRate.textContent = `~$${ratePerM2} / m²`;
+    }
+
+    // Attach Calculator Event Listeners
+    sqmSlider.addEventListener('input', updateCalculations);
+    addonFloorplan.addEventListener('change', updateCalculations);
+    addonMattertags.addEventListener('change', updateCalculations);
+    addonGSV.addEventListener('change', updateCalculations);
+
+    // Initial calculation run
+    updateCalculations();
+
+    // Direct WhatsApp quote trigger
+    bookQuoteBtn.addEventListener('click', () => {
+      const sqm = sqmSlider.value;
+      const total = calcTotalPrice.textContent;
+      const message = `Hello Apex3D! I calculated a quote for a ${sqm} m² property for approximately $${total} USD. I'd like to check your scanning availability.`;
+      const encodedMsg = encodeURIComponent(message);
+      // Replace with your real agency WhatsApp phone number (country code + number)
+      window.open(`https://wa.me/18095550199?text=${encodedMsg}`, '_blank');
+    });
+
+    // Handle Contact Form Submission
+    const contactForm = document.getElementById('contact-form');
+    const bookingAlert = document.getElementById('booking-alert');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('form-name').value;
+      const phone = document.getElementById('form-phone').value;
+      const location = document.getElementById('form-location').value;
+      const sqm = document.getElementById('form-sqm').value;
+      const notes = document.getElementById('form-notes').value;
+
+      // Construct WhatsApp direct fallback or simulate confirmation
+      bookingAlert.className = 'p-4 rounded-xl text-sm font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 block';
+      bookingAlert.innerHTML = `Thank you, <strong>${name}</strong>! Your scan request for <strong>${sqm} m²</strong> in <strong>${location}</strong> has been logged. Redirecting to WhatsApp to confirm your slot...`;
+
+      setTimeout(() => {
+        const text = `New Booking Request:%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(phone)}%0ALocation: ${encodeURIComponent(location)}%0AProperty Size: ${sqm} m²%0ANotes: ${encodeURIComponent(notes)}`;
+        window.open(`https://wa.me/18095550199?text=${text}`, '_blank');
+      }, 1200);
+    });
+  </script>
+</body>
+</html>
