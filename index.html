@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Praxis 3D | Escaneo Matterport y Gemelos Digitales</title>
-  <meta name="description" content="Recorridos virtuales 3D Matterport interactivos y planos esquemáticos para bienes raíces, hotelería y espacios comerciales." />
-  
-  <!-- Google Fonts & Lucide Icons -->
+  <title>Praxis 3D | Recorridos Virtuales Matterport y Planos Arquitectónicos</title>
+  <meta name="description" content="Aumenta tus ventas y captaciones inmobiliarias con gemelos digitales 3D inmersivos y planos esquemáticos métricos en República Dominicana." />
+
+  <!-- Tipografía & Iconos -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,12 +14,15 @@
 
   <style>
     :root {
-      --bg: #0b0f19;
-      --card-bg: rgba(18, 24, 38, 0.7);
+      --bg: #070a13;
+      --card-bg: rgba(15, 23, 42, 0.75);
       --card-border: rgba(255, 255, 255, 0.08);
       --primary: #2563eb;
       --primary-hover: #1d4ed8;
       --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.35);
+      --whatsapp: #25D366;
+      --whatsapp-hover: #1fb855;
       --text: #f8fafc;
       --text-muted: #94a3b8;
       --radius: 16px;
@@ -30,6 +33,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      scroll-behavior: smooth;
     }
 
     body {
@@ -38,26 +42,38 @@
       line-height: 1.6;
       overflow-x: hidden;
       background-image: 
-        radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.15) 0%, transparent 40%),
-        radial-gradient(circle at 85% 65%, rgba(56, 189, 248, 0.12) 0%, transparent 45%);
+        radial-gradient(circle at 10% 10%, rgba(37, 99, 235, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 90% 40%, rgba(56, 189, 248, 0.1) 0%, transparent 45%),
+        radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.08) 0%, transparent 40%);
       background-attachment: fixed;
     }
 
-    /* Container & Layout */
     .container {
       max-width: 1180px;
       margin: 0 auto;
       padding: 0 24px;
     }
 
+    /* Top Announcement Bar */
+    .top-banner {
+      background: linear-gradient(90deg, #1e3a8a, #0284c7);
+      padding: 8px 16px;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      color: #fff;
+    }
+
+    /* Navigation */
     header {
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 100;
       backdrop-filter: blur(16px);
-      background: rgba(11, 15, 25, 0.75);
+      background: rgba(7, 10, 19, 0.85);
       border-bottom: 1px solid var(--card-border);
-      padding: 18px 0;
+      padding: 16px 0;
     }
 
     .nav-wrapper {
@@ -86,14 +102,14 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 28px;
+      gap: 24px;
     }
 
     .nav-links a {
       color: var(--text-muted);
       text-decoration: none;
       font-weight: 500;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       transition: color 0.2s ease;
     }
 
@@ -101,14 +117,15 @@
       color: #fff;
     }
 
+    /* Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 12px 24px;
+      padding: 13px 26px;
       border-radius: 9999px;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 0.95rem;
       text-decoration: none;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -124,53 +141,115 @@
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 25px rgba(37, 99, 235, 0.5);
+      box-shadow: 0 6px 28px rgba(37, 99, 235, 0.55);
     }
 
     .btn-whatsapp {
-      background: #25D366;
+      background: var(--whatsapp);
       color: #fff;
-      font-weight: 600;
+      box-shadow: 0 4px 18px rgba(37, 211, 102, 0.3);
     }
 
     .btn-whatsapp:hover {
-      background: #20bd5a;
+      background: var(--whatsapp-hover);
       transform: translateY(-2px);
-      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.35);
+      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5);
     }
 
-    /* Hero Section */
-    .hero {
-      padding: 90px 0 60px;
-      text-align: center;
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      border: 1px solid var(--card-border);
     }
 
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Floating WhatsApp Button */
+    .floating-whatsapp {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999;
+      background: var(--whatsapp);
+      color: #fff;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 30px rgba(37, 211, 102, 0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+    }
+
+    .floating-whatsapp:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 35px rgba(37, 211, 102, 0.6);
+    }
+
+    /* Badges & Text Accents */
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
+      gap: 8px;
+      padding: 6px 16px;
       border-radius: 9999px;
       background: rgba(56, 189, 248, 0.1);
       border: 1px solid rgba(56, 189, 248, 0.25);
       color: var(--accent);
       font-size: 0.85rem;
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 24px;
+      letter-spacing: 0.3px;
+    }
+
+    .section-title {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 50px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(2rem, 3.5vw, 2.7rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 85px 0 50px;
+      text-align: center;
     }
 
     .hero h1 {
-      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-size: clamp(2.5rem, 5.5vw, 4.3rem);
       font-weight: 800;
-      letter-spacing: -1.5px;
-      line-height: 1.15;
-      margin-bottom: 20px;
+      letter-spacing: -2px;
+      line-height: 1.12;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #60a5fa, #38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .hero p {
       font-size: clamp(1.05rem, 2vw, 1.25rem);
       color: var(--text-muted);
-      max-width: 680px;
+      max-width: 760px;
       margin: 0 auto 36px;
     }
 
@@ -179,26 +258,49 @@
       justify-content: center;
       gap: 16px;
       flex-wrap: wrap;
+      margin-bottom: 40px;
     }
 
-    /* Showcase Demo Section */
+    .trust-strip {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 28px;
+      font-size: 0.85rem;
+      color: #94a3b8;
+      flex-wrap: wrap;
+    }
+
+    .trust-strip span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .trust-strip i {
+      color: #38bdf8;
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Live Demo */
     .demo-section {
-      padding: 40px 0 80px;
+      padding: 40px 0 90px;
     }
 
     .demo-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
-      padding: 10px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(12px);
+      padding: 12px;
+      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(14px);
     }
 
     .iframe-wrapper {
       position: relative;
       width: 100%;
-      height: 580px;
+      height: 600px;
       border-radius: calc(var(--radius) - 6px);
       overflow: hidden;
       background: #000;
@@ -213,34 +315,221 @@
       border: 0;
     }
 
-    /* Section Headers */
-    .section-title {
+    /* Logos / Integration Strip */
+    .logos-strip {
+      padding: 30px 0 70px;
       text-align: center;
-      margin-bottom: 50px;
+      border-bottom: 1px solid var(--card-border);
     }
 
-    .section-title h2 {
-      font-size: 2.2rem;
+    .logos-strip p {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #64748b;
+      margin-bottom: 24px;
       font-weight: 700;
-      letter-spacing: -0.5px;
-      margin-bottom: 12px;
     }
 
-    .section-title p {
+    .logos-grid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      opacity: 0.65;
+    }
+
+    .logo-item {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      letter-spacing: 0.5px;
+    }
+
+    /* Problem vs Solution */
+    .comparison-section {
+      padding: 90px 0;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .comp-card {
+      padding: 36px 30px;
+      border-radius: var(--radius);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+    }
+
+    .comp-card.bad {
+      border-color: rgba(239, 68, 68, 0.25);
+      background: linear-gradient(180deg, rgba(239, 68, 68, 0.05), var(--card-bg));
+    }
+
+    .comp-card.good {
+      border-color: rgba(56, 189, 248, 0.35);
+      background: linear-gradient(180deg, rgba(37, 99, 235, 0.08), var(--card-bg));
+      box-shadow: 0 10px 40px rgba(37, 99, 235, 0.15);
+    }
+
+    .comp-card h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .comp-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .comp-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: #cbd5e1;
+    }
+
+    /* Deliverables Showcase */
+    .deliverables-section {
+      padding: 80px 0;
+    }
+
+    .deliverables-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .deliv-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 30px 24px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .deliv-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .deliv-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(56, 189, 248, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .deliv-card h4 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .deliv-card p {
       color: var(--text-muted);
-      font-size: 1.05rem;
+      font-size: 0.9rem;
     }
 
-    /* Pricing Calculator Section */
+    /* Stats Section */
+    .stats-section {
+      padding: 60px 0;
+      margin: 40px 0;
+      background: linear-gradient(90deg, rgba(37, 99, 235, 0.1), rgba(56, 189, 248, 0.08));
+      border-top: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: clamp(2.5rem, 4vw, 3.2rem);
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-desc {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+
+    /* 4-Step Process */
+    .process-section {
+      padding: 90px 0;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      position: relative;
+    }
+
+    .step-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      position: relative;
+    }
+
+    .step-number {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: rgba(56, 189, 248, 0.2);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .step-card h4 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .step-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Calculator */
+    .calc-section {
+      padding: 90px 0;
+    }
+
     .calc-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
-      padding: 40px;
-      backdrop-filter: blur(12px);
+      padding: 44px;
+      backdrop-filter: blur(14px);
       max-width: 860px;
-      margin: 0 auto 80px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+      margin: 0 auto;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
     }
 
     .slider-box {
@@ -261,9 +550,9 @@
     }
 
     .slider-header strong {
-      font-size: 2rem;
+      font-size: 2.2rem;
       color: var(--accent);
-      font-weight: 700;
+      font-weight: 800;
     }
 
     input[type=range] {
@@ -278,13 +567,12 @@
 
     input[type=range]::-webkit-slider-thumb {
       -webkit-appearance: none;
-      appearance: none;
       width: 24px;
       height: 24px;
       border-radius: 50%;
       background: var(--accent);
       border: 3px solid #0f172a;
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+      box-shadow: 0 0 12px var(--accent-glow);
       cursor: pointer;
       transition: transform 0.1s ease;
     }
@@ -293,21 +581,11 @@
       transform: scale(1.15);
     }
 
-    .addons-group {
-      margin-bottom: 35px;
-    }
-
-    .addons-group h4 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 16px;
-      color: #cbd5e1;
-    }
-
     .addon-items {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 14px;
+      margin-bottom: 35px;
     }
 
     .addon-label {
@@ -319,7 +597,7 @@
       padding: 14px 18px;
       border-radius: 12px;
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       transition: all 0.2s ease;
     }
 
@@ -335,13 +613,13 @@
     }
 
     .calc-results {
-      background: linear-gradient(145deg, rgba(37, 99, 235, 0.08), rgba(56, 189, 248, 0.05));
-      border: 1px solid rgba(56, 189, 248, 0.2);
+      background: linear-gradient(145deg, rgba(37, 99, 235, 0.1), rgba(56, 189, 248, 0.06));
+      border: 1px solid rgba(56, 189, 248, 0.25);
       border-radius: 14px;
-      padding: 24px;
+      padding: 26px;
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 20px;
     }
 
     .price-display-row {
@@ -350,30 +628,27 @@
       align-items: center;
     }
 
-    .price-value-container {
-      text-align: right;
-    }
-
     .price-total {
-      font-size: 2.6rem;
+      font-size: 2.8rem;
       font-weight: 800;
       color: #fff;
       line-height: 1;
     }
 
     .price-per-m2 {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       color: var(--accent);
       margin-top: 4px;
     }
 
     .metrics-pills {
       display: flex;
-      gap: 20px;
+      gap: 24px;
       font-size: 0.88rem;
       color: var(--text-muted);
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
       padding-top: 16px;
+      flex-wrap: wrap;
     }
 
     .metrics-pills span {
@@ -383,18 +658,21 @@
     }
 
     /* Packages Grid */
+    .packages-section {
+      padding: 80px 0;
+    }
+
     .packages-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
       gap: 24px;
-      margin-bottom: 90px;
     }
 
     .pkg-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
-      padding: 32px 28px;
+      padding: 34px 28px;
       display: flex;
       flex-direction: column;
       position: relative;
@@ -419,14 +697,14 @@
       color: #fff;
       font-size: 0.75rem;
       font-weight: 700;
-      padding: 4px 12px;
+      padding: 4px 14px;
       border-radius: 9999px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
     .pkg-card h3 {
-      font-size: 1.4rem;
+      font-size: 1.45rem;
       font-weight: 700;
       margin-bottom: 6px;
     }
@@ -434,12 +712,12 @@
     .pkg-size {
       color: var(--accent);
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       margin-bottom: 16px;
     }
 
     .pkg-price {
-      font-size: 2.2rem;
+      font-size: 2.3rem;
       font-weight: 800;
       margin-bottom: 24px;
     }
@@ -475,69 +753,158 @@
       margin-top: 3px;
     }
 
-    /* Benefits Section */
-    .benefits-grid {
+    /* Testimonials */
+    .testi-section {
+      padding: 80px 0;
+    }
+
+    .testi-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
       gap: 24px;
-      margin-bottom: 90px;
     }
 
-    .benefit-item {
-      background: rgba(255, 255, 255, 0.02);
+    .testi-card {
+      background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 24px;
+      border-radius: var(--radius);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
-    .benefit-item i {
-      width: 32px;
-      height: 32px;
-      color: var(--accent);
-      margin-bottom: 16px;
+    .testi-stars {
+      color: #f59e0b;
+      display: flex;
+      gap: 4px;
+      margin-bottom: 14px;
     }
 
-    .benefit-item h4 {
-      font-size: 1.15rem;
+    .testi-quote {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .testi-author {
       font-weight: 700;
-      margin-bottom: 8px;
+      color: #fff;
+      font-size: 0.95rem;
     }
 
-    .benefit-item p {
+    .testi-role {
+      font-size: 0.82rem;
       color: var(--text-muted);
-      font-size: 0.9rem;
+    }
+
+    /* FAQ */
+    .faq-section {
+      padding: 80px 0;
+    }
+
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .faq-item {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      padding: 20px 24px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s ease;
+    }
+
+    .faq-question:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .faq-answer {
+      padding: 0 24px 20px;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      display: none;
+      line-height: 1.6;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .faq-item.active i {
+      transform: rotate(180deg);
+    }
+
+    /* Final CTA */
+    .cta-final {
+      padding: 90px 0 100px;
+      text-align: center;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(56, 189, 248, 0.12));
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 24px;
+      padding: 60px 30px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .cta-box h2 {
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+
+    .cta-box p {
+      color: #cbd5e1;
+      font-size: 1.15rem;
+      max-width: 620px;
+      margin: 0 auto 36px;
     }
 
     /* Footer */
     footer {
       border-top: 1px solid var(--card-border);
-      padding: 40px 0 50px;
+      padding: 45px 0 50px;
       text-align: center;
       color: var(--text-muted);
       font-size: 0.9rem;
     }
 
     .footer-brand {
-      font-weight: 700;
+      font-weight: 800;
       color: #fff;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       margin-bottom: 8px;
     }
 
     @media (max-width: 768px) {
       .iframe-wrapper {
-        height: 400px;
+        height: 420px;
       }
       .calc-card {
-        padding: 24px 20px;
+        padding: 24px 18px;
       }
       .price-display-row {
         flex-direction: column;
         align-items: flex-start;
         gap: 14px;
-      }
-      .price-value-container {
-        text-align: left;
       }
       .nav-links {
         display: none;
@@ -547,7 +914,12 @@
 </head>
 <body>
 
-  <!-- Header / Navigation -->
+  <!-- Barra de Notificación / Urgencia -->
+  <div class="top-banner">
+    🚀 Agenda tu escaneo esta semana y recibe el <strong>Plano Esquemático 2D incluido sin costo</strong>
+  </div>
+
+  <!-- Navegación Sticky -->
   <header>
     <div class="container nav-wrapper">
       <a href="#" class="brand">
@@ -555,44 +927,106 @@
         PRAXIS <span>3D</span>
       </a>
       <div class="nav-links">
-        <a href="#demo">Recorrido Demo</a>
-        <a href="#paquetes">Paquetes</a>
+        <a href="#solucion">Beneficios</a>
+        <a href="#demo">Demo 3D</a>
+        <a href="#entregables">Entregables</a>
+        <a href="#proceso">Cómo Funciona</a>
         <a href="#cotizador">Cotizador</a>
-        <a href="#beneficios">Ventajas</a>
+        <a href="#paquetes">Precios</a>
+        <a href="#faq">Preguntas</a>
       </div>
       <a href="https://wa.me/18098857775?text=Hola%20Praxis%203D,%20deseo%20agendar%20un%20escaneo%20virtual." class="btn btn-whatsapp" target="_blank" rel="noopener">
-        <i data-lucide="message-circle"></i> WhatsApp
+        <i data-lucide="message-circle"></i> Escribir a WhatsApp
       </a>
     </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Botón Flotante de WhatsApp -->
+  <a href="https://wa.me/18098857775?text=Hola%20Praxis%203D,%20deseo%20cotizar%20un%20escaneo." class="floating-whatsapp" target="_blank" rel="noopener" title="Chatear por WhatsApp">
+    <i data-lucide="message-circle" style="width: 32px; height: 32px;"></i>
+  </a>
+
+  <!-- HERO SECTION -->
   <section class="hero">
     <div class="container">
       <div class="badge">
-        <i data-lucide="layers" style="width: 14px; height: 14px;"></i>
-        Gemelos Digitales y Captura Espacial
+        <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i>
+        Tecnología Matterport Cortex™ AI en República Dominicana
       </div>
-      <h1>Visualización 3D Matterport<br>que Cierra Negocios Inmobiliarios</h1>
-      <p>Transformamos apartamentos, residencias y espacios comerciales en recorridos 3D interactivos y planos arquitectónicos listos para publicar en menos de 24 horas.</p>
+      <h1>Los Compradores Serios No Quieren Fotos Planas.<br><span>Quieren Caminar el Inmueble.</span></h1>
+      <p>Digitalizamos tus apartamentos, villas y espacios comerciales en gemelos 3D interactivos con planos métricos. Permite que inversionistas locales y extranjeros recorran tu propiedad 24/7 y cierren tratos más rápido.</p>
+      
       <div class="hero-actions">
         <a href="#cotizador" class="btn btn-primary">
-          <i data-lucide="calculator"></i> Calcular Cotización
+          <i data-lucide="calculator"></i> Cotizar Mi Inmueble en Segundos
         </a>
-        <a href="#demo" class="btn" style="background: rgba(255,255,255,0.06); color: #fff; border: 1px solid var(--card-border);">
-          <i data-lucide="eye"></i> Ver Demo Interactivo
+        <a href="https://wa.me/18098857775?text=Hola%20Praxis%203D,%20quiero%20coordinar%20una%20sesi%C3%B3n%20de%20escaneo." class="btn btn-whatsapp" target="_blank" rel="noopener">
+          <i data-lucide="calendar"></i> Agendar por WhatsApp
         </a>
+      </div>
+
+      <div class="trust-strip">
+        <span><i data-lucide="check-circle-2"></i> Entrega en menos de 24 horas</span>
+        <span><i data-lucide="check-circle-2"></i> Compatible con MLS y Portales</span>
+        <span><i data-lucide="check-circle-2"></i> Precisión en metros cuadrados</span>
       </div>
     </div>
   </section>
 
-  <!-- Live Demo Section -->
+  <!-- TIRA DE COMPATIBILIDAD / PLATAFORMAS -->
+  <div class="logos-strip">
+    <div class="container">
+      <p>Compatible con todas tus plataformas de publicación</p>
+      <div class="logos-grid">
+        <div class="logo-item">MLS Directo</div>
+        <div class="logo-item">Airbnb & VRBO</div>
+        <div class="logo-item">Google Street View</div>
+        <div class="logo-item">SuperCasas</div>
+        <div class="logo-item">Web Inmobiliaria Propia</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN: PROBLEMA VS SOLUCIÓN -->
+  <section id="solucion" class="comparison-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>¿Por Qué las Fotos Tradicionales Están Costándote Ventas?</h2>
+        <p>El mercado inmobiliario actual exige transparencia espacial inmediata para filtrar a los prospectos de alto valor.</p>
+      </div>
+
+      <div class="comparison-grid">
+        <div class="comp-card bad">
+          <h3 style="color: #f87171;"><i data-lucide="x-circle"></i> Venta Tradicional con Fotos</h3>
+          <ul class="comp-list">
+            <li><i data-lucide="alert-circle" style="color: #f87171; width: 18px;"></i> Docenas de visitas físicas de personas curiosas que terminan diciendo: <em>"no era la distribución que esperaba"</em>.</li>
+            <li><i data-lucide="alert-circle" style="color: #f87171; width: 18px;"></i> Los compradores de la diáspora o inversionistas extranjeros dudan en ofertar por temor a fotos con lentes engañosos.</li>
+            <li><i data-lucide="alert-circle" style="color: #f87171; width: 18px;"></i> Pérdida de tiempo en llamadas explicando dimensiones de pasillos, techos o balcones.</li>
+            <li><i data-lucide="alert-circle" style="color: #f87171; width: 18px;"></i> Tu captación luce idéntica a los otros 20 listados del mismo edificio.</li>
+          </ul>
+        </div>
+
+        <div class="comp-card good">
+          <h3 style="color: #38bdf8;"><i data-lucide="check-circle"></i> Con Gemelo Digital Praxis 3D</h3>
+          <ul class="comp-list">
+            <li><i data-lucide="check" style="color: #38bdf8; width: 18px;"></i> <strong>Visitas físicas 100% pre-calificadas:</strong> Quien pisa la propiedad ya la recorrió virtualmente 5 veces y va listo a negociar.</li>
+            <li><i data-lucide="check" style="color: #38bdf8; width: 18px;"></i> <strong>Cierre de compradores foráneos:</strong> Pueden medir si su cama o sofá cabe usando la regla digital incorporada en el tour.</li>
+            <li><i data-lucide="check" style="color: #38bdf8; width: 18px;"></i> <strong>Exclusivas seguras:</strong> Presentar un gemelo 3D en tu captación demuestra a los dueños que inviertes tecnología real en su propiedad.</li>
+            <li><i data-lucide="check" style="color: #38bdf8; width: 18px;"></i> <strong>Planos 2D con cotas métricas</strong> descargables listos para inversionistas y tasadores.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMO INTERACTIVO EN VIVO -->
   <section id="demo" class="demo-section">
     <div class="container">
       <div class="section-title">
-        <h2>Experiencia Interactiva en Vivo</h2>
-        <p>Explora cada rincón, activa la vista de casa de muñecas (Dollhouse) o mide cualquier espacio en tiempo real.</p>
+        <h2>Prueba la Experiencia en Tiempo Real</h2>
+        <p>Interactúa con este recorrido: gira 360°, haz clic en los círculos del piso para avanzar o presiona el ícono de la casa en miniatura abajo a la izquierda para ver el modo <em>Dollhouse</em>.</p>
       </div>
+
       <div class="demo-card">
         <div class="iframe-wrapper">
           <iframe 
@@ -603,15 +1037,117 @@
           </iframe>
         </div>
       </div>
+
+      <div style="text-align: center; margin-top: 24px;">
+        <a href="#cotizador" class="btn btn-primary">
+          <i data-lucide="sparkles"></i> Quiero Este Nivel de Calidad en Mis Propiedades
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- Dynamic Pricing Calculator -->
-  <section id="cotizador" style="padding: 20px 0 60px;">
+  <!-- CIFRAS / ESTADÍSTICAS DE IMPACTO -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div>
+          <div class="stat-number">+300%</div>
+          <div class="stat-desc">Más tiempo de permanencia en el listado web</div>
+        </div>
+        <div>
+          <div class="stat-number">95%</div>
+          <div class="stat-desc">Más probabilidades de recibir llamadas de compradores serios</div>
+        </div>
+        <div>
+          <div class="stat-number">&lt; 24h</div>
+          <div class="stat-desc">Tiempo de entrega de los enlaces listos para publicar</div>
+        </div>
+        <div>
+          <div class="stat-number">74%</div>
+          <div class="stat-desc">De agentes ganan más exclusivas usando recorridos 3D</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENTREGABLES COMPLETOS -->
+  <section id="entregables" class="deliverables-section">
     <div class="container">
       <div class="section-title">
-        <h2>Cotizador Inmediato por Metros Cuadrados</h2>
-        <p>Ajusta el metraje de tu propiedad para estimar tu inversión al instante.</p>
+        <h2>Todo lo que Recibes en Cada Escaneo</h2>
+        <p>Un kit completo de comercialización visual para que no tengas que contratar múltiples proveedores.</p>
+      </div>
+
+      <div class="deliverables-grid">
+        <div class="deliv-card">
+          <div class="deliv-icon"><i data-lucide="box"></i></div>
+          <h4>Recorrido 3D Matterport</h4>
+          <p>Gemelo virtual inmersivo alojado en la nube de alta velocidad, explorable desde celulares, tablets, computadoras o gafas VR.</p>
+        </div>
+
+        <div class="deliv-card">
+          <div class="deliv-icon"><i data-lucide="file-text"></i></div>
+          <h4>Plano Esquemático 2D</h4>
+          <p>Plano en formato PDF y PNG de alta resolución con las cotas y medidas de cada habitación expresadas en metros lineales y m².</p>
+        </div>
+
+        <div class="deliv-card">
+          <div class="deliv-icon"><i data-lucide="tag"></i></div>
+          <h4>Mattertags Multimedia</h4>
+          <p>Puntos interactivos que flotan en el recorrido para resaltar acabados de lujo, tipo de mármol, marcas de electrodomésticos o vistas.</p>
+        </div>
+
+        <div class="deliv-card">
+          <div class="deliv-icon"><i data-lucide="share-2"></i></div>
+          <h4>Enlaces Dobles (Branded & MLS)</h4>
+          <p>Un enlace con tus datos y foto de contacto para WhatsApp/Redes, y un enlace 100% neutro que cumple las normativas estrictas del MLS.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÓMO FUNCIONA (4 PASOS) -->
+  <section id="proceso" class="process-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Proceso Simple y Sin Complicaciones</h2>
+        <p>Diseñado para no quitarle tiempo a tu agenda de ventas.</p>
+      </div>
+
+      <div class="process-grid">
+        <div class="step-card">
+          <div class="step-number">01</div>
+          <h4>Coordinación en 2 Minutos</h4>
+          <p>Nos indicas la ubicación, metraje aproximado y coordinamos día y hora directamente por WhatsApp.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">02</div>
+          <h4>Captura en Sitio (45 min)</h4>
+          <p>Llegamos con equipo compacto y ligero. Escaneamos la propiedad completa de forma limpia y ordenada.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">03</div>
+          <h4>Procesamiento con IA</h4>
+          <p>Cortex AI sintetiza la geometría tridimensional, alinea los ambientes y calcula el modelo espacial.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">04</div>
+          <h4>Entrega Lista para Vender</h4>
+          <p>En menos de 24 horas recibes los enlaces activos, código de inserción para tu web y tu plano métrico.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COTIZADOR DINÁMICO POR METROS CUADRADOS -->
+  <section id="cotizador" class="calc-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Calcula tu Inversión al Instante</h2>
+        <p>Precios transparentes basados en el metraje real de tu inmueble. Selecciona los extras y reserva directo.</p>
       </div>
 
       <div class="calc-card">
@@ -624,11 +1160,11 @@
         </div>
 
         <div class="addons-group">
-          <h4>Complementos Adicionales:</h4>
+          <h4 style="margin-bottom: 14px; font-size: 0.95rem; color: #cbd5e1;">Selecciona Complementos:</h4>
           <div class="addon-items">
             <label class="addon-label">
               <input type="checkbox" id="checkFloorplan" checked>
-              <span>Plano Esquemático 2D (con cotas) (+$50)</span>
+              <span>Plano Esquemático 2D en Metros (+$50)</span>
             </label>
             <label class="addon-label">
               <input type="checkbox" id="checkMattertags">
@@ -636,7 +1172,7 @@
             </label>
             <label class="addon-label">
               <input type="checkbox" id="checkHosting">
-              <span>Hospedaje Extendido 1 Año (+$45)</span>
+              <span>Hospedaje Extendido por 1 Año (+$45)</span>
             </label>
           </div>
         </div>
@@ -644,142 +1180,228 @@
         <div class="calc-results">
           <div class="price-display-row">
             <div>
-              <span style="color: var(--text-muted); font-size: 0.95rem; font-weight: 500;">Precio Estimado del Servicio:</span>
-              <div style="font-size: 0.95rem; color: #cbd5e1; margin-top: 4px;" id="packageCategoryLabel">Nivel 2: Casa / Apartamento Familiar</div>
+              <span style="color: var(--text-muted); font-size: 0.9rem; font-weight: 500;">Inversión Estimada:</span>
+              <div style="font-size: 0.95rem; color: #e2e8f0; margin-top: 4px; font-weight: 600;" id="packageCategoryLabel">Nivel 2: Residencial Familiar</div>
             </div>
-            <div class="price-value-container">
+            <div style="text-align: right;">
               <div class="price-total" id="totalPriceDisplay">$295 USD</div>
               <div class="price-per-m2" id="pricePerM2Display">Efectivo: ~$1.84 / m²</div>
             </div>
           </div>
 
           <div class="metrics-pills">
-            <span><i data-lucide="clock" style="width: 15px; height: 15px;"></i> Tiempo estimado en sitio: <strong id="timeEstimate" style="color: #fff;">~45-60 min</strong></span>
-            <span><i data-lucide="truck" style="width: 15px; height: 15px;"></i> Entrega de enlaces: <strong style="color: #fff;">&lt; 24 Horas</strong></span>
+            <span><i data-lucide="clock" style="width: 15px; height: 15px;"></i> Tiempo en sitio: <strong id="timeEstimate" style="color: #fff;">~45-60 min</strong></span>
+            <span><i data-lucide="zap" style="width: 15px; height: 15px;"></i> Entrega garantizada: <strong style="color: #fff;">&lt; 24 Horas</strong></span>
+            <span><i data-lucide="shield-check" style="width: 15px; height: 15px;"></i> Calidad: <strong style="color: #fff;">Matterport Cortex™</strong></span>
           </div>
 
-          <button id="btnWhatsappQuote" class="btn btn-whatsapp" style="margin-top: 10px; width: 100%;">
-            <i data-lucide="message-circle"></i> Reservar Escaneo para esta Propiedad
+          <button id="btnWhatsappQuote" class="btn btn-whatsapp" style="margin-top: 10px; width: 100%; font-size: 1.05rem; padding: 15px;">
+            <i data-lucide="message-circle" style="width: 20px; height: 20px;"></i> Bloquear Fecha para Esta Propiedad en WhatsApp
           </button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Packages Section -->
-  <section id="paquetes" style="padding: 20px 0 60px;">
+  <!-- TABLA DE PAQUETES FIJOS -->
+  <section id="paquetes" class="packages-section">
     <div class="container">
       <div class="section-title">
-        <h2>Paquetes de Escaneo Profesional</h2>
-        <p>Estructurados según las dimensiones exactas de tu inventario inmobiliario.</p>
+        <h2>Paquetes Todo Incluido</h2>
+        <p>Estructurados para adaptarse a cualquier tipología de propiedad en tu portafolio.</p>
       </div>
 
       <div class="packages-grid">
-        <!-- Tier 1 -->
+        <!-- Nivel 1 -->
         <div class="pkg-card">
           <h3>Nivel 1: Urbano / Estudio</h3>
           <div class="pkg-size">Hasta 140 m²</div>
           <div class="pkg-price">$175 – $225 <span>USD</span></div>
           <ul class="pkg-features">
             <li><i data-lucide="check"></i> Recorrido completo 3D Matterport</li>
-            <li><i data-lucide="check"></i> Enlace con branding + Enlace neutro para MLS</li>
-            <li><i data-lucide="check"></i> 90 días de hospedaje activo incluidos</li>
-            <li><i data-lucide="check"></i> 5 a 10 fotos 2D de alta resolución extraídas</li>
-            <li><i data-lucide="check"></i> Tiempo en sitio: 30 a 45 minutos</li>
+            <li><i data-lucide="check"></i> Enlace con marca + Enlace MLS neutro</li>
+            <li><i data-lucide="check"></i> 90 días de hospedaje activo en la nube</li>
+            <li><i data-lucide="check"></i> 5 a 10 fotos 2D de alta resolución</li>
+            <li><i data-lucide="check"></i> Ideal para apartamentos de 1 o 2 habitaciones</li>
           </ul>
-          <a href="https://wa.me/18098857775?text=Hola%20Praxis%203D,%20me%20interesa%20el%20Paquete%20Nivel%201%20(Hasta%20140m2)" class="btn btn-primary" target="_blank" rel="noopener">Seleccionar Paquete</a>
+          <a href="https://wa.me/18098857775?text=Hola%20Praxis%203D,%20me%20interesa%20el%20Paquete%20Nivel%201%20(Hasta%20140m2)" class="btn btn-secondary" target="_blank" rel="noopener">Elegir Nivel 1</a>
         </div>
 
-        <!-- Tier 2 (Featured) -->
+        <!-- Nivel 2 (Destacado) -->
         <div class="pkg-card featured">
-          <div class="popular-tag">Más Solicitado</div>
-          <h3>Nivel 2: Residencial Familiar</h3>
+          <div class="popular-tag">Más Rentable</div>
+          <h3>Nivel 2: Familiar / Casa</h3>
           <div class="pkg-size">141 m² a 300 m²</div>
           <div class="pkg-price">$250 – $350 <span>USD</span></div>
           <ul class="pkg-features">
             <li><i data-lucide="check"></i> Todo lo del Nivel 1</li>
-            <li><i data-lucide="check"></i> <strong>Plano Esquemático 2D con cotas métricas</strong></li>
+            <li><i data-lucide="check"></i> <strong>Plano Esquemático 2D Métrico incluido</strong></li>
             <li><i data-lucide="check"></i> 6 meses de hospedaje activo</li>
-            <li><i data-lucide="check"></i> Video corto / Video-recorrido automatizado</li>
-            <li><i data-lucide="check"></i> Entrega garantizada en menos de 24 horas</li>
+            <li><i data-lucide="check"></i> Video corto animado (Reel/Highlight)</li>
+            <li><i data-lucide="check"></i> Entrega prioritaria en menos de 24 horas</li>
           </ul>
-          <a href="https://wa.me/18098857775?text=Hola%20Praxis%203D,%20me%20interesa%20el%20Paquete%20Nivel%202%20(141-300m2)" class="btn btn-primary" target="_blank" rel="noopener">Seleccionar Paquete</a>
+          <a href="https://wa.me/18098857775?text=Hola%20Praxis%203D,%20me%20interesa%20el%20Paquete%20Nivel%202%20(141-300m2)" class="btn btn-primary" target="_blank" rel="noopener">Elegir Nivel 2</a>
         </div>
 
-        <!-- Tier 3 -->
+        <!-- Nivel 3 -->
         <div class="pkg-card">
           <h3>Nivel 3: Villas & Locales</h3>
           <div class="pkg-size">301 m² a 500 m²</div>
           <div class="pkg-price">$400 – $550 <span>USD</span></div>
           <ul class="pkg-features">
             <li><i data-lucide="check"></i> Todo lo del Nivel 2</li>
-            <li><i data-lucide="check"></i> Hasta 10 Mattertags (puntos de interés multimedia)</li>
-            <li><i data-lucide="check"></i> Integración a Google Street View / Business</li>
-            <li><i data-lucide="check"></i> 6 a 12 meses de hospedaje activo</li>
-            <li><i data-lucide="check"></i> Prioridad en programación de captura</li>
+            <li><i data-lucide="check"></i> Hasta 10 Mattertags (puntos de interés)</li>
+            <li><i data-lucide="check"></i> Publicación en Google Street View</li>
+            <li><i data-lucide="check"></i> 12 meses de hospedaje activo</li>
+            <li><i data-lucide="check"></i> Soporte para propiedades de múltiples niveles</li>
           </ul>
-          <a href="https://wa.me/18098857775?text=Hola%20Praxis%203D,%20me%20interesa%20el%20Paquete%20Nivel%203%20(301-500m2)" class="btn btn-primary" target="_blank" rel="noopener">Seleccionar Paquete</a>
+          <a href="https://wa.me/18098857775?text=Hola%20Praxis%203D,%20me%20interesa%20el%20Paquete%20Nivel%203%20(301-500m2)" class="btn btn-secondary" target="_blank" rel="noopener">Elegir Nivel 3</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Benefits Section -->
-  <section id="beneficios" style="padding: 20px 0 80px;">
+  <!-- TESTIMONIOS -->
+  <section class="testi-section">
     <div class="container">
       <div class="section-title">
-        <h2>¿Por Qué Digitalizar con Praxis 3D?</h2>
-        <p>Aceleramos el ciclo de venta de agentes, desarrolladores y administradores inmobiliarios.</p>
+        <h2>Lo Que Dicen Agentes y Desarrolladores</h2>
+        <p>Resultados reales en reducción de tiempos de venta y captación de clientes serios.</p>
       </div>
 
-      <div class="benefits-grid">
-        <div class="benefit-item">
-          <i data-lucide="users"></i>
-          <h4>Compradores Calificados</h4>
-          <p>Filtra clientes indecisos o curiosos. Quien agenda una visita física tras ver el gemelo digital ya conoce la distribución a fondo.</p>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div>
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-quote">"Vendí un apartamento en Piantini a un cliente que vive en Miami sin que viajara a Santo Domingo. Envió su oferta formal después de medir la cocina y el balcón en el recorrido 3D."</p>
+          </div>
+          <div>
+            <div class="testi-author">Carlos M.</div>
+            <div class="testi-role">Broker Asociado &bull; Santo Domingo</div>
+          </div>
         </div>
 
-        <div class="benefit-item">
-          <i data-lucide="globe"></i>
-          <h4>Compradores del Extranjero</h4>
-          <p>Permite a inversionistas foráneos recorrer propiedades a distancia con total realismo y seguridad para ofertar sin viajar.</p>
+        <div class="testi-card">
+          <div>
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-quote">"La velocidad de entrega es lo que más aprecio. Escanean en la mañana y a las 9:00 AM del día siguiente ya tengo el link listo para enviar a mi base de datos por WhatsApp."</p>
+          </div>
+          <div>
+            <div class="testi-author">Laura S.</div>
+            <div class="testi-role">Directora Comercial de Desarrollo Inmobiliario</div>
+          </div>
         </div>
 
-        <div class="benefit-item">
-          <i data-lucide="award"></i>
-          <h4>Gana Captaciones en Exclusiva</h4>
-          <p>Muestra a los propietarios en tus reuniones de captación que ofreces la vanguardia tecnológica que otros agentes no brindan.</p>
-        </div>
-
-        <div class="benefit-item">
-          <i data-lucide="zap"></i>
-          <h4>Operación Ultrarrápida</h4>
-          <p>En sitio en menos de 60 minutos sin interrumpir las operaciones del inmueble, con entrega de archivos en tu bandeja al día siguiente.</p>
+        <div class="testi-card">
+          <div>
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-quote">"Tener los planos esquemáticos con las medidas exactas en metros le da un nivel de profesionalismo a mis captaciones que me ha permitido cobrar mi comisión completa sin regateos."</p>
+          </div>
+          <div>
+            <div class="testi-author">Marcos R.</div>
+            <div class="testi-role">Agente Top Producer</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- PREGUNTAS FRECUENTES (FAQ) -->
+  <section id="faq" class="faq-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Preguntas Frecuentes</h2>
+        <p>Todo lo que necesitas saber antes de coordinar tu primera sesión.</p>
+      </div>
+
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>¿Cuánto tiempo toma escanear una propiedad en sitio?</span>
+            <i data-lucide="chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Un apartamento estándar de 150 a 200 m² toma entre 45 y 60 minutos. No requerimos cables ni trípodes voluminosos, por lo que el proceso es ágil y no interrumpe la rutina del inmueble.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>¿Cómo debo preparar el inmueble antes del escaneo?</span>
+            <i data-lucide="chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            El espacio debe estar completamente limpio, despersonalizado y organizado (estilo open-house). Todas las luces interiores deben funcionar y estar encendidas, y las puertas interiores abiertas para permitir la línea de visión continua del escáner.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>¿El enlace es compatible con los portales inmobiliarios y el MLS?</span>
+            <i data-lucide="chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Sí. Te entregamos dos enlaces: uno con tu marca, logotipo e información de contacto para tus redes y WhatsApp, y otro 100% neutro que cumple estrictamente las reglas de no-contacto del MLS y portales como SuperCasas.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>¿Qué tan exactas son las medidas del plano esquemático 2D?</span>
+            <i data-lucide="chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Nuestros planos tienen una precisión promedio del 96% al 98%, ideal para fines comerciales, distribución de mobiliario, tasaciones y presentaciones de venta a clientes.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>¿Qué sucede cuando se vencen los meses de hospedaje incluidos?</span>
+            <i data-lucide="chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            En propiedades residenciales, el 90% se vende antes de que venza el periodo inicial. Si es un local comercial, Airbnb o proyecto en desarrollo que requiere estar activo todo el año, la renovación anual es sumamente accesible ($35 a $50 USD al año).
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL DE ALTA CONVERSIÓN -->
+  <section class="cta-final">
+    <div class="container">
+      <div class="cta-box">
+        <h2>¿Tienes un Inmueble Listo para Comercializar?</h2>
+        <p>No dejes que tu próxima captación pase desapercibida con fotos convencionales. Agenda hoy y recibe tu enlace interactivo y plano métrico en menos de 24 horas.</p>
+        <a href="https://wa.me/18098857775?text=Hola%20Praxis%203D,%20deseo%20agendar%20un%20escaneo%20para%20esta%20semana." class="btn btn-whatsapp" style="font-size: 1.15rem; padding: 18px 36px;" target="_blank" rel="noopener">
+          <i data-lucide="message-circle" style="width: 24px; height: 24px;"></i> Hablar Directamente con un Especialista
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
     <div class="container">
       <div class="footer-brand">PRAXIS 3D</div>
-      <p style="margin-bottom: 12px;">Soluciones de Captura Espacial y Modelado Virtual 3D</p>
-      <p style="color: #64748b; font-size: 0.82rem;">
-        Contacto directo: +1 (809) 885-7775 &bull; Disponible en Santo Domingo y cobertura nacional.
+      <p style="margin-bottom: 8px;">Gemelos Digitales &bull; Captura Espacial Matterport &bull; Planos Métricos</p>
+      <p style="color: #64748b; font-size: 0.85rem; margin-bottom: 18px;">
+        WhatsApp Directo: +1 (809) 885-7775 &bull; Santo Domingo y cobertura nacional en República Dominicana.
       </p>
-      <p style="margin-top: 20px; font-size: 0.8rem; color: #475569;">
+      <p style="font-size: 0.8rem; color: #475569;">
         &copy; 2026 Praxis 3D. Todos los derechos reservados.
       </p>
     </div>
   </footer>
 
-  <!-- Interactive Logic -->
+  <!-- LÓGICA INTERACTIVA (COTIZADOR + ACORDEÓN FAQ) -->
   <script>
     lucide.createIcons();
 
     const WHATSAPP_PHONE = "18098857775";
 
+    // Elementos del Cotizador
     const areaSlider = document.getElementById('areaSlider');
     const areaValue = document.getElementById('areaValue');
     const totalPriceDisplay = document.getElementById('totalPriceDisplay');
@@ -816,24 +1438,23 @@
         category = "Nivel 3: Villas & Locales (301 a 500 m²)";
         time = "~75 a 100 min";
       } else {
-        // Metraje grande (> 500 m²)
+        // Metraje especial (> 500 m²)
         const excess = area - 500;
         basePrice = 550 + Math.round((excess / 100) * 65);
         category = "Metraje Especial (> 500 m²)";
         time = "~2+ horas";
       }
 
-      // Add-ons
       let addonsTotal = 0;
       let selectedAddons = [];
 
-      // Si es Nivel 1 y solicita plano adicional
+      // Si es Nivel 1 y pide plano
       if (checkFloorplan.checked) {
         if (area <= 140) {
           addonsTotal += 50;
           selectedAddons.push("Plano Esquemático 2D ($50)");
         } else {
-          selectedAddons.push("Plano Esquemático 2D (Incluido en el nivel)");
+          selectedAddons.push("Plano Esquemático 2D (Incluido)");
         }
       }
 
@@ -844,7 +1465,7 @@
 
       if (checkHosting.checked) {
         addonsTotal += 45;
-        selectedAddons.push("Hospedaje Extendido Anual ($45)");
+        selectedAddons.push("Hospedaje 1 Año ($45)");
       }
 
       const total = basePrice + addonsTotal;
@@ -855,15 +1476,15 @@
       packageCategoryLabel.textContent = category;
       timeEstimate.textContent = time;
 
-      // Actualizar botón de WhatsApp
+      // Mensaje estructurado para WhatsApp
       const addonsText = selectedAddons.length > 0 ? selectedAddons.join(", ") : "Ninguno";
-      const message = `Hola Praxis 3D, coticé en su sitio web una propiedad de ${area} m².\n\n` +
-                      `*Detalles de la cotización:*\n` +
-                      `- Categoría: ${category}\n` +
-                      `- Inversión estimada: $${total} USD (~$${ratePerM2}/m²)\n` +
-                      `- Extras solicitados: ${addonsText}\n` +
-                      `- Tiempo en sitio: ${time}\n\n` +
-                      `¿Tienen disponibilidad esta semana para realizar el escaneo?`;
+      const message = `Hola Praxis 3D, coticé en su página web una propiedad de ${area} m².\n\n` +
+                      `📌 *Resumen de Cotización:*\n` +
+                      `• Inmueble: ${category}\n` +
+                      `• Inversión Total: $${total} USD (~$${ratePerM2}/m²)\n` +
+                      `• Complementos: ${addonsText}\n` +
+                      `• Tiempo estimado en sitio: ${time}\n\n` +
+                      `Quisiera verificar disponibilidad para agendar el escaneo.`;
 
       btnWhatsappQuote.onclick = () => {
         window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`, '_blank');
@@ -875,8 +1496,26 @@
     checkMattertags.addEventListener('change', calculatePrice);
     checkHosting.addEventListener('change', calculatePrice);
 
-    // Inicializar cálculo en carga
+    // Inicializar cotizador
     calculatePrice();
+
+    // Acordeón FAQ Interactivo
+    document.querySelectorAll('.faq-question').forEach(item => {
+      item.addEventListener('click', () => {
+        const parent = item.parentElement;
+        const isActive = parent.classList.contains('active');
+        
+        // Cerrar los demás
+        document.querySelectorAll('.faq-item').forEach(child => {
+          child.classList.remove('active');
+        });
+
+        // Alternar el actual
+        if (!isActive) {
+          parent.classList.add('active');
+        }
+      });
+    });
   </script>
 </body>
 </html>
